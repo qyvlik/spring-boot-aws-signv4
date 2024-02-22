@@ -1,5 +1,6 @@
 package io.github.qyvlik.signv4.client.signer;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.hash.Hashing;
 import io.github.qyvlik.signv4.domain.hash.LocalSignatory;
@@ -25,6 +26,14 @@ public final class AwsV4Signer {
                                   String requestDateTime,
                                   String region,
                                   String service) throws IOException {
+
+        Preconditions.checkNotNull(request, "request is null");
+        Preconditions.checkArgument(StringUtils.isBlank(accessKey), "accessKey is blank");
+        Preconditions.checkArgument(StringUtils.isBlank(secretKey), "secretKey is blank");
+        Preconditions.checkArgument(StringUtils.isBlank(requestDateTime), "requestDateTime is blank");
+        Preconditions.checkArgument(StringUtils.isBlank(region), "region is blank");
+        Preconditions.checkArgument(StringUtils.isBlank(service), "service is blank");
+
         String method = request.method();
         String uri = request.url().encodedPath().replace("/+", "/");
         String query = getSortedQueryString(request);

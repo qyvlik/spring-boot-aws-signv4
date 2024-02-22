@@ -3,9 +3,12 @@ package io.github.qyvlik.signv4.server.gateway.action;
 import io.github.qyvlik.domain.Result;
 import io.github.qyvlik.signv4.server.gateway.action.request.ComplexJsonReq;
 import io.github.qyvlik.signv4.server.gateway.action.request.PostRequest;
+import io.github.qyvlik.signv4.web.context.ReqContext;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 
 @RestController
 public class ApiController {
@@ -14,6 +17,8 @@ public class ApiController {
             value = "api/v1/post-form",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public Result<String> echoPostForm(@RequestParam("param1") String param1, @RequestParam("param2") String param2) {
+        ReqContext context = ReqContext.get();
+        log.info("context.data()={}", context.data());
         return Result.success("param1: " + param1 + ", param2: " + param2);
     }
 

@@ -7,7 +7,6 @@ import io.github.qyvlik.signv4.domain.model.Signing;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.Duration;
-import java.util.function.BiConsumer;
 
 public class Authenticating {
     private final SignatoryProvider signatoryProvider;
