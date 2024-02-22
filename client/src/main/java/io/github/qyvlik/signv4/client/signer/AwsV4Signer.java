@@ -6,21 +6,16 @@ import io.github.qyvlik.signv4.domain.hash.LocalSignatory;
 import io.github.qyvlik.signv4.domain.model.CanonicalRequest;
 import io.github.qyvlik.signv4.domain.model.Credential;
 import io.github.qyvlik.signv4.domain.model.Signing;
+import io.github.qyvlik.signv4.domain.utils.URLCoderUtils;
 import okhttp3.Request;
 import okio.Buffer;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public final class AwsV4Signer {
-
-    public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmmss'Z'");
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
-
     private AwsV4Signer() {
     }
 
@@ -72,7 +67,10 @@ public final class AwsV4Signer {
         TreeMap<String, String> map = new TreeMap<>();
         for (String key : url.queryParameterNames()) {
             String value = url.queryParameter(key);
-            map.put(rfc3986Encode(key), rfc3986Encode(value));
+            map.put(
+                    URLCoderUtils.rfc3986Encode(key, StandardCharsets.UTF_8),
+                    URLCoderUtils.rfc3986Encode(value, StandardCharsets.UTF_8)
+            );
         }
         return sortedMapToString(map, "=", "&", "");
     }
@@ -114,19 +112,21 @@ public final class AwsV4Signer {
         return String.join(";", set);
     }
 
-    public static String sortedMapToString(SortedMap<String, String> map, String assign, String delimiter, String ending) {
+    /**
+     * @param map       有序map
+     * @param assign    赋值符号
+     * @param delimiter 分隔符
+     * @param ending    结尾
+     */
+    public static String sortedMapToString(SortedMap<String, String> map,
+                                           String assign,
+                                           String delimiter,
+                                           String ending) {
         List<String> list = Lists.newArrayList();
         for (Map.Entry<String, String> entry : map.entrySet()) {
             list.add(entry.getKey() + assign + entry.getValue());
         }
         return String.join(delimiter, list) + ending;
-    }
-
-    public static String rfc3986Encode(String s) {
-        return URLEncoder.encode(s, StandardCharsets.UTF_8)
-                .replace("+", "%20")
-                .replace("*", "%2A")
-                .replace("%7E", "~");
     }
 
     public static byte[] bodyAsBytes(Request request) throws IOException {
