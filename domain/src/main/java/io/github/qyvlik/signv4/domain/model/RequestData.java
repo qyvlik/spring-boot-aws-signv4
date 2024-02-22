@@ -5,14 +5,14 @@ import com.google.common.hash.Hashing;
 import io.github.qyvlik.signv4.domain.signer.Signatory;
 import org.apache.commons.lang3.StringUtils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.SortedSet;
 
 /**
- *
- * @param requestDateTime  UTC 时间，格式： yyyyMMdd'T'HHmmss'Z'
- *                         在凭证范围内使用的日期和时间。该值是采用 ISO 8601 格式的当前 UTC 时间（例如 20130524T000000Z）。
+ * @param requestDateTime UTC 时间，格式： yyyyMMdd'T'HHmmss'Z'
+ *                        在凭证范围内使用的日期和时间。该值是采用 ISO 8601 格式的当前 UTC 时间（例如 20130524T000000Z）。
  * @param authorization
  * @param request
  */
@@ -30,7 +30,7 @@ public record RequestData(String requestDateTime,
      */
     public static RequestData create(String method,
                                      String uri,
-                                     Map<String, String> headers,
+                                     SortedMap<String, String> headers,
                                      SortedMap<String, String> query,
                                      byte[] body) {
         Authorization authorization = null;
@@ -77,7 +77,7 @@ public record RequestData(String requestDateTime,
     /**
      *
      */
-    public static String getSortedHeadersString(Map<String, String> headers, SortedSet<String> signedHeaders) {
+    public static String getSortedHeadersString(SortedMap<String, String> headers, SortedSet<String> signedHeaders) {
         List<String> headerList = Lists.newArrayList();
         for (Map.Entry<String, String> entry : headers.entrySet()) {
             if (signedHeaders.contains(entry.getKey())) {
