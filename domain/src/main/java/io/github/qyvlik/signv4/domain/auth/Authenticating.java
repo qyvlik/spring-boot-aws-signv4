@@ -7,7 +7,10 @@ import io.github.qyvlik.signv4.domain.model.Signing;
 import io.github.qyvlik.signv4.domain.signer.SignatoryProvider;
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.TimeZone;
 
 public class Authenticating {
     private final SignatoryProvider signatoryProvider;
@@ -26,7 +29,7 @@ public class Authenticating {
         }
         final long now = System.currentTimeMillis();
         String requestDateTime = requestData.requestDateTime();
-        Long requestTime = RequestData.parseRequestDateTime(requestDateTime);
+        Long requestTime = parseRequestDateTime(requestDateTime);
         if (requestTime == null || Math.abs(now - requestTime) > this.requestTimeout) {
             return new AuthResult(null, AuthState.REQUEST_TIMEOUT);
         }
@@ -39,6 +42,16 @@ public class Authenticating {
             return new AuthResult(signing, AuthState.SIGNATURE_INVALIDATE);
         }
         return new AuthResult(signing, AuthState.SUCCESS);
+    }
+
+    public static Long parseRequestDateTime(String requestDateTime) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        try {
+            return sdf.parse(requestDateTime).getTime();
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
 }

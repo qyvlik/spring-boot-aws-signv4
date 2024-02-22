@@ -1,6 +1,5 @@
 package io.github.qyvlik.signv4.domain.model;
 
-import com.google.common.collect.ImmutableSortedMap;
 import com.google.common.collect.Lists;
 import com.google.common.hash.Hashing;
 import io.github.qyvlik.signv4.domain.signer.Signatory;
@@ -10,14 +9,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public record RequestData(String method,
-                          String uri,
-                          String requestDateTime,
-                          ImmutableSortedMap<String, String> headers,
-                          ImmutableSortedMap<String, String> query,
+/**
+ *
+ * @param requestDateTime  UTC 时间，格式： yyyyMMdd'T'HHmmss'Z'
+ *                         在凭证范围内使用的日期和时间。该值是采用 ISO 8601 格式的当前 UTC 时间（例如 20130524T000000Z）。
+ * @param authorization
+ * @param request
+ */
+public record RequestData(String requestDateTime,
                           Authorization authorization,
                           CanonicalRequest request) {
-
     /**
      * 在服务端构建
      *
@@ -55,11 +56,7 @@ public record RequestData(String method,
         }
 
         return new RequestData(
-                method,
-                uri,
                 requestDateTime,
-                ImmutableSortedMap.copyOf(headers),
-                ImmutableSortedMap.copyOf(query),
                 authorization,
                 canonicalRequest
         );
@@ -114,17 +111,5 @@ public record RequestData(String method,
             return map.get(alternateHeaderName);
         }
         return value;
-    }
-
-
-
-    public static Long parseRequestDateTime(String requestDateTime) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'");
-        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-        try {
-            return sdf.parse(requestDateTime).getTime();
-        } catch (ParseException e) {
-            return null;
-        }
     }
 }
