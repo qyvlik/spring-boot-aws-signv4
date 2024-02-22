@@ -24,15 +24,15 @@ public class Authenticating {
         if (StringUtils.isBlank(signatureFromClient)) {
             return new AuthResult(null, AuthState.SIGNATURE_IS_BLANK);
         }
-        Signatory signatory = this.signatoryProvider.getSignatory(authorization.credential().accessKey());
-        if (signatory == null) {
-            return new AuthResult(null, AuthState.SECRET_KEY_NOT_FOUND);
-        }
         final long now = System.currentTimeMillis();
         String requestDateTime = requestData.requestDateTime();
         Long requestTime = RequestData.parseRequestDateTime(requestDateTime);
         if (requestTime == null || Math.abs(now - requestTime) > this.requestTimeout) {
             return new AuthResult(null, AuthState.REQUEST_TIMEOUT);
+        }
+        Signatory signatory = this.signatoryProvider.getSignatory(authorization.credential().accessKey());
+        if (signatory == null) {
+            return new AuthResult(null, AuthState.SECRET_KEY_NOT_FOUND);
         }
         Signing signing = requestData.signature(signatory);
         if (!signatureFromClient.equals(signing.signature())) {
