@@ -3,11 +3,9 @@ package io.github.qyvlik.signv4.domain.model;
 import com.google.common.collect.ImmutableSortedMap;
 import com.google.common.collect.Lists;
 import com.google.common.hash.Hashing;
-import io.github.qyvlik.signv4.domain.hash.Signatory;
+import io.github.qyvlik.signv4.domain.signer.Signatory;
 import org.apache.commons.lang3.StringUtils;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;

@@ -1,9 +1,9 @@
 package io.github.qyvlik.signv4.server.provider;
 
 import com.google.common.collect.Maps;
-import io.github.qyvlik.signv4.domain.auth.SignatoryProvider;
-import io.github.qyvlik.signv4.domain.hash.LocalSignatory;
-import io.github.qyvlik.signv4.domain.hash.Signatory;
+import io.github.qyvlik.signv4.domain.signer.SignatoryProvider;
+import io.github.qyvlik.signv4.domain.signer.LocalSignatory;
+import io.github.qyvlik.signv4.domain.signer.Signatory;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;

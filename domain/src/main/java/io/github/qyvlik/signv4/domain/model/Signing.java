@@ -2,7 +2,7 @@ package io.github.qyvlik.signv4.domain.model;
 
 import com.google.common.hash.Hashing;
 import com.google.common.io.BaseEncoding;
-import io.github.qyvlik.signv4.domain.hash.Signatory;
+import io.github.qyvlik.signv4.domain.signer.Signatory;
 
 import java.nio.charset.StandardCharsets;
 

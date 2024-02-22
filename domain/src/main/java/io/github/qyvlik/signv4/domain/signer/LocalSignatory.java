@@ -1,4 +1,4 @@
-package io.github.qyvlik.signv4.domain.hash;
+package io.github.qyvlik.signv4.domain.signer;
 
 import com.google.common.hash.Hashing;
 

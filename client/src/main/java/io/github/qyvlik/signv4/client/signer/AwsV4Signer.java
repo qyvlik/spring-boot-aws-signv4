@@ -3,7 +3,7 @@ package io.github.qyvlik.signv4.client.signer;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.hash.Hashing;
-import io.github.qyvlik.signv4.domain.hash.LocalSignatory;
+import io.github.qyvlik.signv4.domain.signer.LocalSignatory;
 import io.github.qyvlik.signv4.domain.model.CanonicalRequest;
 import io.github.qyvlik.signv4.domain.model.Credential;
 import io.github.qyvlik.signv4.domain.model.Signing;
@@ -28,11 +28,11 @@ public final class AwsV4Signer {
                                   String service) throws IOException {
 
         Preconditions.checkNotNull(request, "request is null");
-        Preconditions.checkArgument(StringUtils.isBlank(accessKey), "accessKey is blank");
-        Preconditions.checkArgument(StringUtils.isBlank(secretKey), "secretKey is blank");
-        Preconditions.checkArgument(StringUtils.isBlank(requestDateTime), "requestDateTime is blank");
-        Preconditions.checkArgument(StringUtils.isBlank(region), "region is blank");
-        Preconditions.checkArgument(StringUtils.isBlank(service), "service is blank");
+        Preconditions.checkArgument(StringUtils.isNotBlank(accessKey), "accessKey is blank");
+        Preconditions.checkArgument(StringUtils.isNotBlank(secretKey), "secretKey is blank");
+        Preconditions.checkArgument(StringUtils.isNotBlank(requestDateTime), "requestDateTime is blank");
+        Preconditions.checkArgument(StringUtils.isNotBlank(region), "region is blank");
+        Preconditions.checkArgument(StringUtils.isNotBlank(service), "service is blank");
 
         String method = request.method();
         String uri = request.url().encodedPath().replace("/+", "/");
