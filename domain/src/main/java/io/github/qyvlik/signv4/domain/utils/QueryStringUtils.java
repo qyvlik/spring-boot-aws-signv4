@@ -22,7 +22,7 @@ public class QueryStringUtils {
             }
             final String encodeValue = pair[1];
             String fullDecodeValue = URLDecoder.decode(encodeValue, StandardCharsets.UTF_8);
-            String value = URLCoderUtils.rfc3986Encode(fullDecodeValue, StandardCharsets.UTF_8);
+            String value = UriEncoder.rfc3986Encode(fullDecodeValue, StandardCharsets.UTF_8);
 
             queryMap.put(key, value);
         }

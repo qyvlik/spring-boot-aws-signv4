@@ -7,7 +7,7 @@ import io.github.qyvlik.signv4.domain.signer.LocalSignatory;
 import io.github.qyvlik.signv4.domain.model.CanonicalRequest;
 import io.github.qyvlik.signv4.domain.model.Credential;
 import io.github.qyvlik.signv4.domain.model.Signing;
-import io.github.qyvlik.signv4.domain.utils.URLCoderUtils;
+import io.github.qyvlik.signv4.domain.utils.UriEncoder;
 import okhttp3.Request;
 import okio.Buffer;
 import org.apache.commons.lang3.StringUtils;
@@ -77,8 +77,8 @@ public final class AwsV4Signer {
         for (String key : url.queryParameterNames()) {
             String value = url.queryParameter(key);
             map.put(
-                    URLCoderUtils.rfc3986Encode(key, StandardCharsets.UTF_8),
-                    URLCoderUtils.rfc3986Encode(value, StandardCharsets.UTF_8)
+                    UriEncoder.rfc3986Encode(key, StandardCharsets.UTF_8),
+                    UriEncoder.rfc3986Encode(value, StandardCharsets.UTF_8)
             );
         }
         return sortedMapToString(map, "=", "&", "");

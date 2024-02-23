@@ -3,7 +3,7 @@ package io.github.qyvlik.signv4.domain.utils;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 
-public class URLCoderUtils {
+public class UriEncoder {
     /**
      * https://github.com/aws/aws-sdk-java/blob/master/aws-java-sdk-core/src/main/java/com/amazonaws/util/SdkHttpUtils.java#L66
      * @param s
