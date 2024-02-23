@@ -60,5 +60,5 @@ public interface Signv4ServerClient {
      */
     @HEAD("/api/v1/head")
     Call<Void> head(@Query("param1") String param1,
-                            @Query("param2") String param2);
+                    @Query("param2") String param2);
 }
