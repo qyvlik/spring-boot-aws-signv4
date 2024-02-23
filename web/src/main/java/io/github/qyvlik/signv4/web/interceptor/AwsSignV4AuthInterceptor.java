@@ -37,7 +37,7 @@ public class AwsSignV4AuthInterceptor implements HandlerInterceptor {
         } else {
             String ak = requestData.authorization().credential().accessKey();
 //             fill some info
-            ReqContext.add(requestData);
+            ReqContext.add(requestData, authResult.signing());
         }
         return authResult.success();
 //        return true;
