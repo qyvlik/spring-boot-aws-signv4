@@ -23,10 +23,10 @@ public record RequestData(String requestDateTime,
      * 在服务端构建
      *
      * @param method  请求方法
-     * @param uri     请求路径
+     * @param uri     请求路径，路径中的 `%2F` 必须转义回 `/`
      * @param headers 请求头
-     * @param query   查询字符串
-     * @param body    请求体
+     * @param query   查询字符串，query 的 value 必须经过 {@UriEncoder.rfc3986Encode} 编码
+     * @param body    原始请求体
      */
     public static RequestData create(String method,
                                      String uri,
