@@ -3,6 +3,7 @@ package io.github.qyvlik.signv4.domain.model;
 import com.google.common.collect.Lists;
 import com.google.common.hash.Hashing;
 import io.github.qyvlik.signv4.domain.signer.Signatory;
+import io.github.qyvlik.signv4.domain.signer.Signing;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;

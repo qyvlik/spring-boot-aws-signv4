@@ -1,14 +1,18 @@
-package io.github.qyvlik.signv4.domain.model;
+package io.github.qyvlik.signv4.domain.signer;
 
 import com.google.common.hash.Hashing;
 import com.google.common.io.BaseEncoding;
-import io.github.qyvlik.signv4.domain.signer.Signatory;
+import io.github.qyvlik.signv4.domain.model.Calculating;
+import io.github.qyvlik.signv4.domain.model.CanonicalRequest;
+import io.github.qyvlik.signv4.domain.model.Credential;
+import io.github.qyvlik.signv4.domain.model.StringToSign;
 
 import java.nio.charset.StandardCharsets;
 
 /**
  * 签名过程
  * https://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/create-signed-request.html#create-signed-request-steps
+ *
  * @param request      plainText = request.plainText()
  * @param credential
  * @param stringToSign stringToSign = algorithm + '\n' + requestDateTime + '\n' + credentialScope + '\n' + hashedCanonicalRequest
@@ -23,7 +27,6 @@ public record Signing(CanonicalRequest request,
                       String signature) {
 
     /**
-     *
      * @param request         规范请求
      * @param credential      凭证
      * @param algorithm       用于创建规范请求的哈希的算法。对于 SHA-256，算法是 AWS4-HMAC-SHA256。

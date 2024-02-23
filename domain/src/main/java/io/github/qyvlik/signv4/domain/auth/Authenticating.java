@@ -3,7 +3,7 @@ package io.github.qyvlik.signv4.domain.auth;
 import io.github.qyvlik.signv4.domain.signer.Signatory;
 import io.github.qyvlik.signv4.domain.model.Authorization;
 import io.github.qyvlik.signv4.domain.model.RequestData;
-import io.github.qyvlik.signv4.domain.model.Signing;
+import io.github.qyvlik.signv4.domain.signer.Signing;
 import io.github.qyvlik.signv4.domain.signer.SignatoryProvider;
 import org.apache.commons.lang3.StringUtils;
 

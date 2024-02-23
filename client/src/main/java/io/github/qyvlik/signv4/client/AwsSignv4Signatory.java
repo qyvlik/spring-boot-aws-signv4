@@ -1,7 +1,7 @@
 package io.github.qyvlik.signv4.client;
 
 import io.github.qyvlik.signv4.client.signer.AwsV4Signer;
-import io.github.qyvlik.signv4.domain.model.Signing;
+import io.github.qyvlik.signv4.domain.signer.Signing;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;

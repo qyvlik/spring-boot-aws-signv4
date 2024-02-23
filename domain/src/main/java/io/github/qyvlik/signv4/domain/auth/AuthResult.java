@@ -1,6 +1,6 @@
 package io.github.qyvlik.signv4.domain.auth;
 
-import io.github.qyvlik.signv4.domain.model.Signing;
+import io.github.qyvlik.signv4.domain.signer.Signing;
 
 /**
  *

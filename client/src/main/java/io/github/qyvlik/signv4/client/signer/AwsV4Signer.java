@@ -6,7 +6,7 @@ import com.google.common.hash.Hashing;
 import io.github.qyvlik.signv4.domain.signer.LocalSignatory;
 import io.github.qyvlik.signv4.domain.model.CanonicalRequest;
 import io.github.qyvlik.signv4.domain.model.Credential;
-import io.github.qyvlik.signv4.domain.model.Signing;
+import io.github.qyvlik.signv4.domain.signer.Signing;
 import io.github.qyvlik.signv4.domain.utils.UriEncoder;
 import okhttp3.Request;
 import okio.Buffer;

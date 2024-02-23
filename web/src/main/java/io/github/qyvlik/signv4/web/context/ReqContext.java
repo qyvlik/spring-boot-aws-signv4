@@ -1,7 +1,7 @@
 package io.github.qyvlik.signv4.web.context;
 
 import io.github.qyvlik.signv4.domain.model.RequestData;
-import io.github.qyvlik.signv4.domain.model.Signing;
+import io.github.qyvlik.signv4.domain.signer.Signing;
 import org.springframework.core.NamedThreadLocal;
 
 public record ReqContext(RequestData data, Signing signing) {
