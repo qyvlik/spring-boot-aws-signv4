@@ -21,7 +21,6 @@ public class CachedRequest extends HttpServletRequestWrapper {
                          final byte[] cachedBody,
                          MultiValueMap<String, String> form) throws IOException {
         super(request);
-        InputStream requestInputStream = request.getInputStream();
         this.cachedBody = cachedBody;
         this.form = form;
     }

@@ -4,8 +4,8 @@ import com.google.common.collect.Maps;
 import io.github.qyvlik.signv4.domain.model.RequestData;
 import io.github.qyvlik.signv4.domain.utils.QueryStringUtils;
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.StreamUtils;
 
 import java.io.IOException;
 import java.net.URLDecoder;
@@ -20,7 +20,7 @@ public class RequestDataUtils {
         String uri = request.getRequestURI();
         TreeMap<String, String> headers = getSortedHeadersFromRequest(request);
         TreeMap<String, String> query = QueryStringUtils.sortQueryString(request.getQueryString());
-        byte[] body = IOUtils.toByteArray(request.getInputStream());
+        byte[] body = StreamUtils.copyToByteArray(request.getInputStream());
         return RequestData.create(
                 method,
                 uri,
