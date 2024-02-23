@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -19,8 +20,8 @@ public class CachedRequestFactory {
     private final FormHttpMessageConverter converter;
     private final boolean mock;                         // spring-mvc mock
 
-    public CachedRequestFactory(FormHttpMessageConverter converter, boolean mock) {
-        this.converter = converter;
+    public CachedRequestFactory(boolean mock) {
+        this.converter = new AllEncompassingFormHttpMessageConverter();
         this.mock = mock;
     }
 

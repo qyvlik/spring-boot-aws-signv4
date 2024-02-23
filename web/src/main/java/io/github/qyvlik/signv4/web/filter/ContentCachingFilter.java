@@ -24,10 +24,7 @@ public class ContentCachingFilter extends OncePerRequestFilter {
     }
 
     public ContentCachingFilter(boolean mock) {
-        this.factory = new CachedRequestFactory(
-                new AllEncompassingFormHttpMessageConverter(),
-                mock
-        );
+        this.factory = new CachedRequestFactory(mock);
     }
 
     @Override
